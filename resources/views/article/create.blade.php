@@ -21,7 +21,7 @@
 
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
-                <form method="POST" action="{{ route('article.store') }}"
+                <form method="POST" action="{{ route('article.store') }}" enctype="multipart/form-data"
                     class="p-4 rounded bg-dark text-light border border-secondary shadow">
                     @csrf
 
@@ -40,6 +40,11 @@
                     <div class="mb-3">
                         <label for="body" class="form-label">Contenuto</label>
                         <textarea name="body" id="body" rows="8" class="form-control bg-dark text-light border-secondary">{{ old('body') }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="img" class="form-label">Immagine</label>
+                        <input type="file" name="img" id="img" class="form-control">
                     </div>
 
                     <button type="submit" class="btn btn-outline-light">

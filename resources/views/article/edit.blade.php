@@ -8,7 +8,7 @@
 
                 <x-display-errors />
 
-                <form method="POST" action="{{ route('article.update', $article) }}"
+                <form method="POST" action="{{ route('article.update', $article) }}" enctype="multipart/form-data"
                     class="p-4 rounded bg-dark text-light border border-secondary shadow">
                     @csrf
                     @method('PUT')
@@ -30,6 +30,11 @@
                     <div class="mb-3">
                         <label for="body" class="form-label">Contenuto</label>
                         <textarea name="body" id="body" rows="8" class="form-control bg-dark text-light border-secondary">{{ old('body', $article->body) }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="img" class="form-label">Immagine</label>
+                        <input type="file" name="img" id="img" class="form-control">
                     </div>
 
                     <button type="submit" class="btn btn-outline-light">

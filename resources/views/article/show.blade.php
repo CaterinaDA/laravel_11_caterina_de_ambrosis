@@ -13,7 +13,8 @@
                         Modifica
                     </a>
 
-                    <form method="POST" action="{{ route('article.destroy', $article) }}">
+                    <form method="POST" action="{{ route('article.destroy', $article) }}"
+                        onsubmit="return confirm('Vuoi eliminare questo articolo?')">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-outline-danger">
@@ -23,6 +24,12 @@
                 </div>
 
                 <article class="bg-dark border border-secondary rounded p-4 shadow-sm">
+
+                    @if ($article->img)
+                        <img src="{{ Storage::url($article->img) }}"
+                            class="img-fluid mb-4 rounded border border-secondary w-100" alt="{{ $article->title }}">
+                    @endif
+
                     <h1 class="mb-2">{{ $article->title }}</h1>
                     <h4 class="text-secondary mb-4">{{ $article->subtitle }}</h4>
 

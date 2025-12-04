@@ -1,4 +1,8 @@
 <div class="card h-100 bg-dark text-light border-secondary shadow-sm">
+    @if ($article->img)
+        <img src="{{ Storage::url($article->img) }}" class="card-img-top" alt="{{ $article->title }}">
+    @endif
+
     <div class="card-body d-flex flex-column">
         <h5 class="card-title">{{ $article->title }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ $article->subtitle }}</h6>
@@ -7,7 +11,7 @@
             {{ \Illuminate\Support\Str::limit($article->body, 150) }}
         </p>
 
-        <a href="{{ route('article.show', compact('article')) }}" class="btn btn-outline-light mt-3">
+        <a href="{{ route('article.show', $article) }}" class="btn btn-outline-light mt-3">
             Leggi tutto
         </a>
     </div>

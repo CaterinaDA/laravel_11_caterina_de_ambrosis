@@ -30,10 +30,25 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => ['required'],
+            'subtitle' => ['required'],
+            'body' => ['required'],
+            'img' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
+        ]);
+
+        $img = null;
+
+        if ($request->file('img')) {
+            $img = $request->file('img')->store('img', 'public');
+        }
+
+
         Article::create([
             'title' => $request->title,
             'subtitle' => $request->subtitle,
             'body' => $request->body,
+            'img' => $img,
         ]);
 
         return redirect()->route('article.index')->with('success', 'Articolo creato con successo');
@@ -66,14 +81,21 @@ class ArticleController extends Controller
             'title' => ['required'],
             'subtitle' => ['required'],
             'body' => ['required'],
+            'img' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
 
         ]);
 
-        $article->update([
-            'title' => $request->title,
+        $data = [
+            'title'    => $request->title,
             'subtitle' => $request->subtitle,
-            'body' => $request->body,
-        ]);
+            'body'     => $request->body,
+        ];
+
+        if ($request->file('img')) {
+            $data['img'] = $request->file('img')->store('img', 'public');
+        }
+
+
 
         return redirect()->route('article.show', $article)->with('success', 'Articolo aggiornato con successo');
     }
