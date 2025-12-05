@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -49,6 +51,8 @@ class ArticleController extends Controller
             'subtitle' => $request->subtitle,
             'body' => $request->body,
             'img' => $img,
+            'user_id' => Auth::user()->id
+
         ]);
 
         return redirect()->route('article.index')->with('success', 'Articolo creato con successo');
@@ -91,10 +95,12 @@ class ArticleController extends Controller
             'body'     => $request->body,
         ];
 
+
         if ($request->file('img')) {
             $data['img'] = $request->file('img')->store('img', 'public');
         }
 
+        $article->update($data);
 
 
         return redirect()->route('article.show', $article)->with('success', 'Articolo aggiornato con successo');

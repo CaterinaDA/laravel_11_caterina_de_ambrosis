@@ -36,6 +36,10 @@
                     <p class="fs-5 mb-0">
                         {{ $article->body }}
                     </p>
+
+                    <p class="text-secondary my-2">
+                        Creato dall'utente: {{ $article->user->name ?? 'Autore sconosciuto' }}
+                    </p>
                 </article>
 
             </div>

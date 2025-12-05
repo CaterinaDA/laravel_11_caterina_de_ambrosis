@@ -11,6 +11,11 @@
             {{ \Illuminate\Support\Str::limit($article->body, 150) }}
         </p>
 
+        <p class="small text-muted mt-2">
+            Creato dall'utente {{ $article->user->name ?? 'Autore sconosciuto' }}
+        </p>
+
+
         <a href="{{ route('article.show', $article) }}" class="btn btn-outline-light mt-3">
             Leggi tutto
         </a>
